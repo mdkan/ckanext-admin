@@ -24,8 +24,9 @@ setup(
 	],
 	entry_points=\
 	"""
-        [ckan.plugins]
+    [ckan.plugins]
 	# Add plugins here, eg
 	# myplugin=ckanext.admin:PluginClass
+	systeminfo=ckanext.admin.plugin:SystemInfo
 	""",
 )
