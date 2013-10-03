@@ -6,7 +6,7 @@ version = '0.1'
 setup(
 	name='ckanext-admin',
 	version=version,
-	description="System and usage reporting tools",
+	description="Reporting tools for admins",
 	long_description="""\
 	""",
 	classifiers=[], # Get strings from http://pypi.python.org/pypi?%3Aaction=list_classifiers
@@ -27,6 +27,6 @@ setup(
     [ckan.plugins]
 	# Add plugins here, eg
 	# myplugin=ckanext.admin:PluginClass
-	systeminfo=ckanext.admin.plugin:SystemInfo
+	admin_reporting=ckanext.admin.plugin:Reporting
 	""",
 )

@@ -8,9 +8,9 @@ from ckan.plugins import IRoutes, IMapper, IConfigurer
 
 log = logging.getLogger('ckanext.admin')
 
-class SystemInfo(SingletonPlugin):
+class Reporting(SingletonPlugin):
     """
-    Plugin for displaying system info
+    Plugin for displaying report
     """
     
     def update_config(self, config):
@@ -23,19 +23,15 @@ class SystemInfo(SingletonPlugin):
         template_dir = os.path.join(rootdir, 'ckanext', 'admin', 'theme', 'templates')
         config['extra_template_paths'] = ','.join([
             template_dir, config.get('extra_template_paths', '')])
-        log.debug("###### extra template paths: ")
         log.debug(config['extra_template_paths'])
     implements(IRoutes, inherit=True)
     implements(IConfigurer, inherit=True)
     
     def before_map(self, map):
-        map.connect('ckanadmin_system',
-                    '/ckan-admin/system',
-                    controller='ckanext.admin.controllers:SystemController',
-                    action='system')
+        
         map.connect('ckanadmin_report',
                     '/ckan-admin/report',
-                    controller='ckanext.admin.controllers:SystemController',
+                    controller='ckanext.admin.controllers:ReportController',
                     action='report')
         return map
     
