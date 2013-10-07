@@ -10,9 +10,6 @@ from ckan.lib.create_test_data import CreateTestData
 from ckan.tests import WsgiAppCase, CommonFixtureMethods, url_for
 from ckan.tests.html_check import HtmlCheckMethods
 
-# Todo: remove Kata
-from ckanext.kata import model as kata_model
-
 
 class TestAdminControllers(WsgiAppCase, HtmlCheckMethods, CommonFixtureMethods):
     """
@@ -23,7 +20,6 @@ class TestAdminControllers(WsgiAppCase, HtmlCheckMethods, CommonFixtureMethods):
     def setup_class(cls):
         """Set up testing environment."""
 
-        kata_model.setup()
         CreateTestData.create()
 
         wsgiapp = make_app(config['global_conf'], **config['app_conf'])
@@ -33,7 +29,6 @@ class TestAdminControllers(WsgiAppCase, HtmlCheckMethods, CommonFixtureMethods):
     def teardown_class(cls):
         """Get away from testing environment."""
 
-        kata_model.delete_tables()
         CreateTestData.delete()
 
         
