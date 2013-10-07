@@ -3,44 +3,37 @@ import logging
 from pylons import config
 from paste.deploy.converters import asbool
 
-import commands
-
 from ckan.lib.base import render, c
 from ckan.controllers.admin import AdminController
 import ckan.model as model
-from ckan.model import Package, PackageExtra, User
+import ckanext.admin.report as report
 
 
-log = logging.getLogger('ckanext.admin')
+log = logging.getLogger(__name__)
 
 class ReportController(AdminController):
     def report(self):
         '''
-        Generates a simple report page to admin site
+        Generates a simple report page to admin site.
+        Note, that the stats extension provides some nice reporting
         '''
         # package info
-        # Todo: make this a real quality page
-        c.numpackages = c.openpackages = 0
-        c.numpackages = model.Session.query(Package.id).count()
+        # Total packages
+        pkg_stats = report.PackageReport()
+        c.numpackages = pkg_stats.total_packages()
+        # Total of packages, where extra key=access and value=free
         key = 'access'
         value = 'free'
-        c.openpackages = model.Session.query(Package.id).\
-                   filter(PackageExtra.key==key).\
-                   filter(PackageExtra.value==value).\
-                   filter(Package.id==PackageExtra.package_id).\
-                   count()
+        c.openpackages = pkg_stats.total_packages_by_extra(key, value)
         # format to: d.dd %
-        if c.numpackages > 0:
-            c.popen = float(c.openpackages) / float(c.numpackages) * 100           
-        else:
-            c.popen = 0
-        c.popen = "{0:.2f}".format(c.popen) + ' %'
+        try:
+            c.popen = "{0:.2f}".format(float(c.openpackages) / float(c.numpackages) * 100) + ' %'          
+        except ZeroDivisionError:
+            c.popen = "No packages"
         
-        
-        # Todo: remove?
         # user info
-        c.numusers = 0
-        c.numusers = model.Session.query(User.id).count()
+        usr_stats = report.UserReport()
+        c.numusers = usr_stats.total_users()
         
         return render('admin/report.html')
     

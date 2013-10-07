@@ -10,16 +10,9 @@
         <h4 class="m-bottom">{{ _('Dataset report') }}</h4>
         <table class="table table-striped table-bordered table-condensed">
         <tbody>
-        
-        {% if c.numpackages %}
-          <tr><th class="dataset-label">Number of packages:</th><td>{{ c.numpackages }}</td></tr>
-        {% endif %}
-        {% if c.openpackages %}
-          <tr><th class="dataset-label">Number of freely accessible packages:</th><td>{{ c.openpackages }}</td></tr>
-        {% endif %}
-        {% if c.popen %}
-          <tr><th class="dataset-label">Percentage of open packages:</th><td>{{ c.popen }}</td></tr>
-        {% endif %}
+        <tr><th class="dataset-label">Number of packages:</th><td>{{ c.numpackages }}</td></tr>
+        <tr><th class="dataset-label">Number of freely accessible packages:</th><td>{{ c.openpackages }}</td></tr>
+        <tr><th class="dataset-label">Percentage of open packages:</th><td>{{ c.popen }}</td></tr>
         </tbody>
         </table>
         
