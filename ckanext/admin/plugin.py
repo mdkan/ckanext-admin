@@ -23,7 +23,6 @@ class Reporting(SingletonPlugin):
         template_dir = os.path.join(rootdir, 'ckanext', 'admin', 'theme', 'templates')
         config['extra_template_paths'] = ','.join([
             template_dir, config.get('extra_template_paths', '')])
-        log.debug(config['extra_template_paths'])
     implements(IRoutes, inherit=True)
     implements(IConfigurer, inherit=True)
     
