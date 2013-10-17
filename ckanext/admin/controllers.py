@@ -1,7 +1,6 @@
 import logging
 
 from pylons import config
-from paste.deploy.converters import asbool
 
 from ckan.lib.base import render, c
 from ckan.controllers.admin import AdminController
