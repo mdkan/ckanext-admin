@@ -1,3 +1,6 @@
+'''
+Basic code for ckanext-admin
+'''
 # this is a namespace package
 try:
     import pkg_resources

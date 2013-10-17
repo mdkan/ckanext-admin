@@ -1,10 +1,8 @@
-import datetime
+'''
+Specific reports for authorities via tailored SQL queries.
+'''
 import logging
 
-from pylons import config
-import sqlalchemy as sa
-
-import ckan.plugins as p
 import ckan.model as model
 
 log = logging.getLogger(__name__)

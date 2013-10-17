@@ -1,3 +1,7 @@
+'''
+Controller(s) for reporting in admin page
+'''
+
 import logging
 
 from pylons import config
