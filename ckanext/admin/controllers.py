@@ -8,7 +8,6 @@ from pylons import config
 
 from ckan.lib.base import render, c
 from ckan.controllers.admin import AdminController
-import ckan.model as model
 import ckanext.admin.report as report
 
 
@@ -30,7 +29,7 @@ class ReportController(AdminController):
         c.openpackages = pkg_stats.total_packages_by_extra(key, value)
         # format to: d.dd %
         try:
-            c.popen = "{0:.2f}".format(float(c.openpackages) / float(c.numpackages) * 100) + ' %'          
+            c.popen = "{0:.2f}".format(float(c.openpackages) / float(c.numpackages) * 100) + ' %'
         except ZeroDivisionError:
             c.popen = "No packages"
         

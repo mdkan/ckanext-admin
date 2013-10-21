@@ -1,3 +1,5 @@
+# pylint: disable=E1101
+
 '''
 Specific reports for authorities via tailored SQL queries.
 '''
