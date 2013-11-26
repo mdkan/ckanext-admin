@@ -23,10 +23,13 @@ class ReportController(AdminController):
         # Total packages
         pkg_stats = report.PackageReport()
         c.numpackages = pkg_stats.total_packages()
-        # Total of packages, where extra key=access and value=free
-        key = 'access'
-        value = 'free'
-        c.openpackages = pkg_stats.total_packages_by_extra(key, value)
+        # Total of packages, where extra key=availability and value=direct_download + access_request
+        key = 'availability'
+        value = 'direct_download'
+        free = pkg_stats.total_packages_by_extra(key, value)
+        value = "access_request"
+        after_reg = pkg_stats.total_packages_by_extra(key, value)
+        c.openpackages = free + after_reg
         # format to: d.dd %
         try:
             c.popen = "{0:.2f}".format(float(c.openpackages) / float(c.numpackages) * 100) + ' %'
