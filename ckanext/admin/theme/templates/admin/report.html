@@ -7,26 +7,93 @@
 
       <h3 class="m-bottom">{{ _('Reporting') }}</h3>
       <div class="module-content">
-        <h4 class="m-bottom">{{ _('Dataset report') }}</h4>
+        <h4 class="m-bottom">{{ _('Dataset report - current status') }}</h4>
         <table class="table table-striped table-bordered table-condensed">
         <tbody>
         <tr><th class="dataset-label">Number of packages:</th><td>{{ c.numpackages }}</td></tr>
-        <tr><th class="dataset-label">Number of freely accessible packages:</th><td>{{ c.openpackages }}</td></tr>
-        <tr><th class="dataset-label">Percentage of open packages:</th><td>{{ c.popen }}</td></tr>
+        <tr><th class="dataset-label">Number of freely accessible packages:</th><td>{{ c.cc0 }}</td></tr>
+        <tr><th class="dataset-label">Number of conditionally free packages:</th><td>{{ c.ccby }}</td></tr>
+        <tr><th class="dataset-label">Others, license specified:</th><td>{{ c.notfree }}</td></tr>
+        </tbody>
+        </table>
+        <table class="table table-striped table-bordered table-condensed">
+        <tbody>
+        <tr><th class="dataset-label" colspan="6">Number of new packages per month (incl. harvest sources + deleted)</th></tr>
+          {% for item in c.pkg_per_month.total|dictsort %}
+            {% if loop.index % 12 == 1 %}
+              <tr>
+            {% endif %}
+            {% if loop.index % 12 == 7 %}
+              </tr>
+            {% endif %}
+            <td><b>{{ item[0] }}:</b> {{ item[1] }}</td>
+          {% endfor %}
+        </tbody>
+        </table>
+        <table class="table table-striped table-bordered table-condensed">
+        <tbody>
+        <tr><th class="dataset-label" colspan="6">Number of new free packages per month</th></tr>
+          {% for item in c.pkg_per_month.free|dictsort %}
+            {% if loop.index % 12 == 1 %}
+              <tr>
+            {% endif %}
+            {% if loop.index % 12 == 7 %}
+              </tr>
+            {% endif %}
+            <td><b>{{ item[0] }}:</b> {{ item[1] }}</td>
+          {% endfor %}
+        </tbody>
+        </table>
+        <table class="table table-striped table-bordered table-condensed">
+        <tbody>
+        <tr><th class="dataset-label" colspan="6">Number of new conditionally free packages per month</th></tr>
+          {% for item in c.pkg_per_month.freecond|dictsort %}
+            {% if loop.index % 12 == 1 %}
+              <tr>
+            {% endif %}
+            {% if loop.index % 12 == 7 %}
+              </tr>
+            {% endif %}
+            <td><b>{{ item[0] }}:</b> {{ item[1] }}</td>
+          {% endfor %}
+        </tbody>
+        </table>
+        <table class="table table-striped table-bordered table-condensed">
+        <tbody>
+        <tr><th class="dataset-label" colspan="6">Number of new nonfree packages per month</th></tr>
+          {% for item in c.pkg_per_month.nonfree|dictsort %}
+            {% if loop.index % 12 == 1 %}
+              <tr>
+            {% endif %}
+            {% if loop.index % 12 == 7 %}
+              </tr>
+            {% endif %}
+            <td><b>{{ item[0] }}:</b> {{ item[1] }}</td>
+          {% endfor %}
         </tbody>
         </table>
         
         <h4 class="m-bottom">{{ _('User report') }}</h4>
         <table class="table table-striped table-bordered table-condensed">
         <tbody>
-          <tr><th class="dataset-label">Number of users (total):</th><td>{{ c.numusers }}</td></tr>
+          <tr><th class="dataset-label">Number of users (total)</th><td>{{ c.numusers }}</td></tr>
         </tbody>
         </table>
-        
+        <table class="table table-striped table-bordered table-condensed">
+        <tbody>
+        <tr><th class="dataset-label" colspan="6">Number of registered users per month</th></tr>
+          {% for item in c.users_per_month|dictsort %}
+            {% if loop.index % 12 == 1 %}
+              <tr>
+            {% endif %}
+            {% if loop.index % 12 == 5 %}
+              </tr>
+            {% endif %}
+            <td><b>{{ item[0] }}:</b> {{ item[1] }}</td>
+          {% endfor %}
+        </tbody>
+        </table>
       </div>
-      
-
-
     </div>
   </article>
 {% endblock %}
