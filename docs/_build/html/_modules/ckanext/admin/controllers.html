@@ -1,0 +1,167 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>ckanext.admin.controllers &mdash; Kata metadata catalogue documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/agogo.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '1.0.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="Kata metadata catalogue documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" /> 
+  </head>
+  <body>
+    <div class="header-wrapper">
+      <div class="header">
+        <div class="headertitle"><a
+          href="../../../index.html">Kata</a></div>
+        <div class="rel">
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a>
+        </div>
+       </div>
+    </div>
+
+    <div class="content-wrapper">
+      <div class="content">
+        <div class="document">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for ckanext.admin.controllers</h1><div class="highlight"><pre>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Controller(s) for reporting in admin page</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="kn">import</span> <span class="nn">datetime</span>
+
+<span class="kn">from</span> <span class="nn">pylons</span> <span class="kn">import</span> <span class="n">config</span>
+
+<span class="kn">from</span> <span class="nn">ckan.lib.base</span> <span class="kn">import</span> <span class="n">render</span><span class="p">,</span> <span class="n">c</span>
+<span class="kn">from</span> <span class="nn">ckan.controllers.admin</span> <span class="kn">import</span> <span class="n">AdminController</span>
+<span class="kn">import</span> <span class="nn">ckanext.admin.report</span> <span class="kn">as</span> <span class="nn">report</span>
+
+
+<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+
+<div class="viewcode-block" id="datetime2date"><a class="viewcode-back" href="../../../ckanext.admin.html#ckanext.admin.controllers.datetime2date">[docs]</a><span class="k">def</span> <span class="nf">datetime2date</span><span class="p">(</span><span class="n">datetime_</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="p">(</span><span class="n">datetime_</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="n">datetime_</span><span class="o">.</span><span class="n">month</span><span class="p">,</span> <span class="n">datetime_</span><span class="o">.</span><span class="n">day</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="lastmonth"><a class="viewcode-back" href="../../../ckanext.admin.html#ckanext.admin.controllers.lastmonth">[docs]</a><span class="k">def</span> <span class="nf">lastmonth</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">month</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">month</span> <span class="o">==</span> <span class="mo">01</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">year</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="ReportController"><a class="viewcode-back" href="../../../ckanext.admin.html#ckanext.admin.controllers.ReportController">[docs]</a><span class="k">class</span> <span class="nc">ReportController</span><span class="p">(</span><span class="n">AdminController</span><span class="p">):</span>
+<div class="viewcode-block" id="ReportController.report"><a class="viewcode-back" href="../../../ckanext.admin.html#ckanext.admin.controllers.ReportController.report">[docs]</a>    <span class="k">def</span> <span class="nf">report</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Generates a simple report page to admin site.</span>
+<span class="sd">        Note, that the stats extension provides some nice reporting</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c"># package info</span>
+        <span class="c"># Total packages</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">pkg_stats</span> <span class="o">=</span> <span class="n">report</span><span class="o">.</span><span class="n">PackageReport</span><span class="p">()</span>
+            <span class="n">c</span><span class="o">.</span><span class="n">numpackages</span> <span class="o">=</span> <span class="n">pkg_stats</span><span class="o">.</span><span class="n">total_packages</span><span class="p">()</span>
+            <span class="c"># Total of packages, where extra key=availability and value=direct_download and license=cc0</span>
+            <span class="n">c</span><span class="o">.</span><span class="n">cc0</span> <span class="o">=</span> <span class="n">pkg_stats</span><span class="o">.</span><span class="n">total_packages_by_license</span><span class="p">(</span><span class="s">&quot;cc-zero&quot;</span><span class="p">)</span>
+            <span class="c"># Total of packages, where extra key=availability and value=direct_download and license=cc-by</span>
+            <span class="n">cc3by</span> <span class="o">=</span> <span class="n">pkg_stats</span><span class="o">.</span><span class="n">total_packages_by_license</span><span class="p">(</span><span class="s">&quot;cc-by&quot;</span><span class="p">)</span>
+            <span class="n">cc4by</span> <span class="o">=</span> <span class="n">pkg_stats</span><span class="o">.</span><span class="n">total_packages_by_license</span><span class="p">(</span><span class="s">&quot;cc-by-4.0&quot;</span><span class="p">)</span>
+            <span class="n">c</span><span class="o">.</span><span class="n">ccby</span> <span class="o">=</span> <span class="n">cc3by</span> <span class="o">+</span> <span class="n">cc4by</span>
+            <span class="c"># Total of packages, where extra key=availability and value is not direct_download and </span>
+            <span class="c"># license is not notspecified</span>
+            <span class="n">c</span><span class="o">.</span><span class="n">notfree</span> <span class="o">=</span> <span class="n">pkg_stats</span><span class="o">.</span><span class="n">total_nonfree_packages</span><span class="p">()</span>
+        
+            <span class="n">c</span><span class="o">.</span><span class="n">pkg_per_month</span> <span class="o">=</span> <span class="n">pkg_stats</span><span class="o">.</span><span class="n">new_packages</span><span class="p">()</span>
+            
+            <span class="c"># user info</span>
+            <span class="n">usr_stats</span> <span class="o">=</span> <span class="n">report</span><span class="o">.</span><span class="n">UserReport</span><span class="p">()</span>
+            
+            <span class="n">c</span><span class="o">.</span><span class="n">numusers</span> <span class="o">=</span> <span class="n">usr_stats</span><span class="o">.</span><span class="n">total_users</span><span class="p">()</span>
+        
+            <span class="c">#date_ = datetime2date(datetime.date.today())</span>
+            <span class="c">#c.date__0 = (date_.year, date_.month)</span>
+            <span class="c">#c.usrmonth__0 = usr_stats.users_by_month(date_.year, date_.month)</span>
+            <span class="c">#c.date__1 = lastmonth(date_.year, date_.month)</span>
+            <span class="c">#c.usrmonth__1 = usr_stats.users_by_month(c.date__1[0], c.date__1[1])</span>
+            <span class="c">#c.date__2 = lastmonth(c.date__1[0], c.date__1[1])</span>
+            <span class="c">#c.usrmonth__2 = usr_stats.users_by_month(c.date__2[0], c.date__2[1])</span>
+            <span class="n">c</span><span class="o">.</span><span class="n">users_per_month</span> <span class="o">=</span> <span class="n">usr_stats</span><span class="o">.</span><span class="n">users_by_month</span><span class="p">()</span>
+        <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
+        
+        <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="s">&#39;admin/report.html&#39;</span><span class="p">)</span>
+    </div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+        </div>
+        <div class="sidebar">
+          <h3>Table Of Contents</h3>
+          <ul class="simple">
+</ul>
+
+          <h3 style="margin-top: 1.5em;">Search</h3>
+          <form class="search" action="../../../search.html" method="get">
+            <input type="text" name="q" />
+            <input type="submit" value="Go" />
+            <input type="hidden" name="check_keywords" value="yes" />
+            <input type="hidden" name="area" value="default" />
+          </form>
+          <p class="searchtip" style="font-size: 90%">
+            Enter search terms or a module, class or function name.
+          </p>
+        </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+    <div class="footer-wrapper">
+      <div class="footer">
+        <div class="left">
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |
+          <a href="../../../genindex.html" title="General Index"
+             >index</a>
+        </div>
+
+        <div class="right">
+          
+    <div class="footer">
+        &copy; Copyright 2014, CSC.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+        </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+  </body>
+</html>

@@ -1,0 +1,323 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>ckanext.admin package &mdash; Kata metadata catalogue documentation</title>
+    
+    <link rel="stylesheet" href="_static/agogo.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Kata metadata catalogue documentation" href="index.html" /> 
+  </head>
+  <body>
+    <div class="header-wrapper">
+      <div class="header">
+        <div class="headertitle"><a
+          href="index.html">Kata</a></div>
+        <div class="rel">
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a>
+        </div>
+       </div>
+    </div>
+
+    <div class="content-wrapper">
+      <div class="content">
+        <div class="document">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="ckanext-admin-package">
+<h1>ckanext.admin package<a class="headerlink" href="#ckanext-admin-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-ckanext.admin.controllers">
+<span id="ckanext-admin-controllers-module"></span><h2>ckanext.admin.controllers module<a class="headerlink" href="#module-ckanext.admin.controllers" title="Permalink to this headline">¶</a></h2>
+<p>Controller(s) for reporting in admin page</p>
+<dl class="class">
+<dt id="ckanext.admin.controllers.ReportController">
+<em class="property">class </em><tt class="descclassname">ckanext.admin.controllers.</tt><tt class="descname">ReportController</tt><a class="reference internal" href="_modules/ckanext/admin/controllers.html#ReportController"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ckanext.admin.controllers.ReportController" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">ckan.controllers.admin.AdminController</span></tt></p>
+<dl class="method">
+<dt id="ckanext.admin.controllers.ReportController.report">
+<tt class="descname">report</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/ckanext/admin/controllers.html#ReportController.report"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ckanext.admin.controllers.ReportController.report" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates a simple report page to admin site.
+Note, that the stats extension provides some nice reporting</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="ckanext.admin.controllers.datetime2date">
+<tt class="descclassname">ckanext.admin.controllers.</tt><tt class="descname">datetime2date</tt><big>(</big><em>datetime_</em><big>)</big><a class="reference internal" href="_modules/ckanext/admin/controllers.html#datetime2date"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ckanext.admin.controllers.datetime2date" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ckanext.admin.controllers.lastmonth">
+<tt class="descclassname">ckanext.admin.controllers.</tt><tt class="descname">lastmonth</tt><big>(</big><em>year</em>, <em>month</em><big>)</big><a class="reference internal" href="_modules/ckanext/admin/controllers.html#lastmonth"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ckanext.admin.controllers.lastmonth" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-ckanext.admin.plugin">
+<span id="ckanext-admin-plugin-module"></span><h2>ckanext.admin.plugin module<a class="headerlink" href="#module-ckanext.admin.plugin" title="Permalink to this headline">¶</a></h2>
+<p>Plugin to provide reporting in admin page</p>
+<dl class="class">
+<dt id="ckanext.admin.plugin.Reporting">
+<em class="property">class </em><tt class="descclassname">ckanext.admin.plugin.</tt><tt class="descname">Reporting</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/ckanext/admin/plugin.html#Reporting"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ckanext.admin.plugin.Reporting" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">ckan.plugins.core.SingletonPlugin</span></tt>, <tt class="xref py py-class docutils literal"><span class="pre">ckan.plugins.interfaces.IRoutes</span></tt>, <tt class="xref py py-class docutils literal"><span class="pre">ckan.plugins.interfaces.IConfigurer</span></tt></p>
+<p>Plugin for displaying report</p>
+<dl class="method">
+<dt id="ckanext.admin.plugin.Reporting.before_map">
+<tt class="descname">before_map</tt><big>(</big><em>map</em><big>)</big><a class="reference internal" href="_modules/ckanext/admin/plugin.html#Reporting.before_map"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ckanext.admin.plugin.Reporting.before_map" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ckanext.admin.plugin.Reporting.update_config">
+<tt class="descname">update_config</tt><big>(</big><em>config</em><big>)</big><a class="reference internal" href="_modules/ckanext/admin/plugin.html#Reporting.update_config"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ckanext.admin.plugin.Reporting.update_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>IConfigurer inplementation to tell CKAN to search for templates in
+this extension&#8217;s templates folder</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-ckanext.admin.report">
+<span id="ckanext-admin-report-module"></span><h2>ckanext.admin.report module<a class="headerlink" href="#module-ckanext.admin.report" title="Permalink to this headline">¶</a></h2>
+<p>Specific reports for authorities via tailored SQL queries.</p>
+<dl class="class">
+<dt id="ckanext.admin.report.PackageReport">
+<em class="property">class </em><tt class="descclassname">ckanext.admin.report.</tt><tt class="descname">PackageReport</tt><a class="reference internal" href="_modules/ckanext/admin/report.html#PackageReport"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ckanext.admin.report.PackageReport" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Queries to gain package data</p>
+<dl class="classmethod">
+<dt id="ckanext.admin.report.PackageReport.new_packages">
+<em class="property">classmethod </em><tt class="descname">new_packages</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/ckanext/admin/report.html#PackageReport.new_packages"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ckanext.admin.report.PackageReport.new_packages" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="classmethod">
+<dt id="ckanext.admin.report.PackageReport.nonfree_packages">
+<em class="property">classmethod </em><tt class="descname">nonfree_packages</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/ckanext/admin/report.html#PackageReport.nonfree_packages"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ckanext.admin.report.PackageReport.nonfree_packages" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return count of packages which are not freely downloadable
+License must not be not specified</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">list of ids as tuple</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="ckanext.admin.report.PackageReport.packages_by_license">
+<em class="property">classmethod </em><tt class="descname">packages_by_license</tt><big>(</big><em>license</em><big>)</big><a class="reference internal" href="_modules/ckanext/admin/report.html#PackageReport.packages_by_license"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ckanext.admin.report.PackageReport.packages_by_license" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return count of directly downloadable packages with
+license as zz0</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>license</strong> &#8211; license id</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">list of ids as tuple</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="ckanext.admin.report.PackageReport.total_nonfree_packages">
+<em class="property">classmethod </em><tt class="descname">total_nonfree_packages</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/ckanext/admin/report.html#PackageReport.total_nonfree_packages"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ckanext.admin.report.PackageReport.total_nonfree_packages" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return count of packages which are not freely downloadable
+License must not be not specified</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">count</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="ckanext.admin.report.PackageReport.total_packages">
+<em class="property">classmethod </em><tt class="descname">total_packages</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/ckanext/admin/report.html#PackageReport.total_packages"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ckanext.admin.report.PackageReport.total_packages" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return total of packages
+Assuming state=&#8221;active&#8221;, type=&#8221;dataset&#8221;</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">count</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="ckanext.admin.report.PackageReport.total_packages_by_column">
+<em class="property">classmethod </em><tt class="descname">total_packages_by_column</tt><big>(</big><em>column</em>, <em>value</em><big>)</big><a class="reference internal" href="_modules/ckanext/admin/report.html#PackageReport.total_packages_by_column"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ckanext.admin.report.PackageReport.total_packages_by_column" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return total of packages, whose specific column and value
+are given. Assuming state=&#8221;active&#8221;, type=&#8221;dataset&#8221;</p>
+<p>:param
+:return: count</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="ckanext.admin.report.PackageReport.total_packages_by_extra">
+<em class="property">classmethod </em><tt class="descname">total_packages_by_extra</tt><big>(</big><em>key</em>, <em>value</em><big>)</big><a class="reference internal" href="_modules/ckanext/admin/report.html#PackageReport.total_packages_by_extra"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ckanext.admin.report.PackageReport.total_packages_by_extra" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return total of packages, whose key and extra are given.
+Assuming state=&#8221;active&#8221;, type=&#8221;dataset&#8221;</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>key</strong> &#8211; key value from extras</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Value:</th><td class="field-body">value from extras</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">count</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="ckanext.admin.report.PackageReport.total_packages_by_license">
+<em class="property">classmethod </em><tt class="descname">total_packages_by_license</tt><big>(</big><em>license</em><big>)</big><a class="reference internal" href="_modules/ckanext/admin/report.html#PackageReport.total_packages_by_license"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ckanext.admin.report.PackageReport.total_packages_by_license" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return count of directly downloadable packages with
+license as cc0</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>license</strong> &#8211; license id</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">count</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="ckanext.admin.report.UserReport">
+<em class="property">class </em><tt class="descclassname">ckanext.admin.report.</tt><tt class="descname">UserReport</tt><a class="reference internal" href="_modules/ckanext/admin/report.html#UserReport"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ckanext.admin.report.UserReport" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Queries for user information</p>
+<dl class="classmethod">
+<dt id="ckanext.admin.report.UserReport.total_users">
+<em class="property">classmethod </em><tt class="descname">total_users</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/ckanext/admin/report.html#UserReport.total_users"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ckanext.admin.report.UserReport.total_users" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return total of users</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">count</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="ckanext.admin.report.UserReport.users_by_month">
+<em class="property">classmethod </em><tt class="descname">users_by_month</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/ckanext/admin/report.html#UserReport.users_by_month"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ckanext.admin.report.UserReport.users_by_month" title="Permalink to this definition">¶</a></dt>
+<dd><p>New users by month</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">count</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="ckanext.admin.report.table">
+<tt class="descclassname">ckanext.admin.report.</tt><tt class="descname">table</tt><big>(</big><em>name</em><big>)</big><a class="reference internal" href="_modules/ckanext/admin/report.html#table"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ckanext.admin.report.table" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-ckanext.admin">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-ckanext.admin" title="Permalink to this headline">¶</a></h2>
+<p>Basic code for ckanext-admin</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+        </div>
+        <div class="sidebar">
+          <h3>Table Of Contents</h3>
+          <ul class="simple">
+</ul>
+
+          <h3 style="margin-top: 1.5em;">Search</h3>
+          <form class="search" action="search.html" method="get">
+            <input type="text" name="q" />
+            <input type="submit" value="Go" />
+            <input type="hidden" name="check_keywords" value="yes" />
+            <input type="hidden" name="area" value="default" />
+          </form>
+          <p class="searchtip" style="font-size: 90%">
+            Enter search terms or a module, class or function name.
+          </p>
+        </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+    <div class="footer-wrapper">
+      <div class="footer">
+        <div class="left">
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |
+          <a href="genindex.html" title="General Index"
+             >index</a>
+            <br/>
+            <a href="_sources/ckanext.admin.txt"
+               rel="nofollow">Show Source</a>
+        </div>
+
+        <div class="right">
+          
+    <div class="footer">
+        &copy; Copyright 2014, CSC.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+        </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+  </body>
+</html>
