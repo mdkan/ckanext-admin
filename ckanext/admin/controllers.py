@@ -37,11 +37,15 @@ class ReportController(AdminController):
             pkg_stats = report.PackageReport()
             c.numpackages = pkg_stats.total_packages()
             # Total of packages, where extra key=availability and value=direct_download and license=cc0
-            c.cc0 = pkg_stats.total_packages_by_license("cc-zero")
+            ccz = pkg_stats.total_packages_by_license('CC0-1.0')
+            odc = pkg_stats.total_packages_by_license('ODC-PDDL-1.0')
+            c.cc0 = ccz + odc
             # Total of packages, where extra key=availability and value=direct_download and license=cc-by
-            cc3by = pkg_stats.total_packages_by_license("cc-by")
-            cc4by = pkg_stats.total_packages_by_license("cc-by-4.0")
-            c.ccby = cc3by + cc4by
+            ccbysa = pkg_stats.total_packages_by_license("CC-BY-SA-4.0")
+            cc4by = pkg_stats.total_packages_by_license("CC-BY-4.0")
+            odbl = pkg_stats.total_packages_by_license("ODbL-1.0")
+            oddby = pkg_stats.total_packages_by_license("ODC-BY-1.0")
+            c.ccby = ccbysa + cc4by + odbl + oddby
             # Total of packages, where extra key=availability and value is not direct_download and 
             # license is not notspecified
             c.notfree = pkg_stats.total_nonfree_packages()
