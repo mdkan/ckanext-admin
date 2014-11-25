@@ -1,5 +1,4 @@
 from setuptools import setup, find_packages
-import sys, os
 
 version = '0.1'
 
@@ -13,8 +12,8 @@ setup(
 	keywords='',
 	author='Pinja Koskinen',
 	author_email='pinja.koskinen@csc.fi',
-	url='http://www.csc.fi',
-	license='Beerware',
+	url='http://github.com/kata-csc/ckanext-admin',
+	license='AGPL',
 	packages=find_packages(exclude=['ez_setup', 'examples', 'tests']),
 	namespace_packages=['ckanext', 'ckanext.admin'],
 	include_package_data=True,
