@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-version = '0.1'
+version = '0.2.0'
 
 setup(
 	name='ckanext-admin',
@@ -24,8 +24,8 @@ setup(
 	entry_points=\
 	"""
     [ckan.plugins]
-	# Add plugins here, eg
-	# myplugin=ckanext.admin:PluginClass
-	admin_reporting=ckanext.admin.plugin:Reporting
-	""",
+    # Add plugins here, eg
+    # myplugin=ckanext.admin:PluginClass
+    admin_reporting=ckanext.admin.plugin:Reporting
+    """,
 )
