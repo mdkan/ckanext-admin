@@ -2,39 +2,28 @@
 
 """Unit tests for controllers"""
 
-from pylons import config
-import paste.fixture    # pylint: disable=F0401
-
-from ckan.config.middleware import make_app
-from ckan.lib.create_test_data import CreateTestData
 from ckan.tests import WsgiAppCase, CommonFixtureMethods, url_for
 from ckan.tests.html_check import HtmlCheckMethods
 import ckan.model as model
+from ckanext.harvest import model as harvest_model
+import ckanext.kata.model as kata_model
 
 
 class TestAdminControllers(WsgiAppCase, HtmlCheckMethods, CommonFixtureMethods):
     """
     Tests for admin reporting tool's controllers and routing.
     """
-    
+
     @classmethod
     def setup_class(cls):
-        """Set up testing environment."""
+        kata_model.setup()
+        harvest_model.setup()
 
-        #model.repo.rebuild_db()
-        CreateTestData.create()
-
-        cls.user = model.User.by_name(u'testsysadmin')
-
-        #wsgiapp = make_app(config['global_conf'], **config['app_conf'])
-        #cls.app = paste.fixture.TestApp(wsgiapp)
+        model.User(name="testsysadmin", sysadmin=True).save()
 
     @classmethod
     def teardown_class(cls):
-        """Get away from testing environment."""
-
-        #CreateTestData.delete()
-        #model.repo.rebuild_db()
+        model.repo.rebuild_db()
 
         
     def test_admin_reporting_rendered(self):
